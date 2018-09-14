@@ -2,11 +2,9 @@
 (function (root, factory) {
     if (typeof exports === 'object') {
         module.exports = factory();
-    }
-    else if (typeof define === 'function' && define.amd) {
+    } else if (typeof define === 'function' && define.amd) {
         define(['jquery', 'googlemaps!'], factory);
-    }
-    else {
+    } else {
         root.GMaps = factory();
     }
 
@@ -66,8 +64,7 @@
 
                 return callback.apply(this, callback_params);
             });
-        }
-        else {
+        } else {
             for (i = 0; i < array_length; i++) {
                 callback_params = original_callback_params;
                 callback_params.splice(0, 0, array[i]);
@@ -108,8 +105,7 @@
             if (!(coords[i] instanceof google.maps.LatLng)) {
                 if (coords[i].length > 0 && typeof (coords[i][0]) === "object") {
                     coords[i] = arrayToLatLng(coords[i], useGeoJSON);
-                }
-                else {
+                } else {
                     coords[i] = coordsToLatLngs(coords[i], useGeoJSON);
                 }
             }
@@ -187,7 +183,7 @@
                     console.error('Google Maps API is required. Please register the following JavaScript library https://maps.googleapis.com/maps/api/js.');
                 }
 
-                return function () { };
+                return function () {};
             }
 
             if (!this) return new GMaps(options);
@@ -423,8 +419,7 @@
 
                         buildContextMenuHTML(control, e);
                     };
-                }
-                else {
+                } else {
                     buildContextMenuHTML(control, e);
                 }
 
@@ -678,8 +673,7 @@
         if (options.content) {
             if (typeof options.content === 'string') {
                 control.innerHTML = options.content;
-            }
-            else if (options.content instanceof HTMLElement) {
+            } else if (options.content instanceof HTMLElement) {
                 control.appendChild(options.content);
             }
         }
@@ -864,12 +858,10 @@
         if (options.hasOwnProperty('gm_accessors_')) {
             // Native google.maps.Marker object
             marker = options;
-        }
-        else {
+        } else {
             if ((options.hasOwnProperty('lat') && options.hasOwnProperty('lng')) || options.position) {
                 marker = this.createMarker(options);
-            }
-            else {
+            } else {
                 throw 'No latitude or longitude defined.';
             }
         }
@@ -938,8 +930,7 @@
             }
 
             this.markers = new_markers;
-        }
-        else {
+        } else {
             for (var i = 0; i < collection.length; i++) {
                 var index = this.markers.indexOf(collection[i]);
 
@@ -1003,8 +994,7 @@
                         if (navigator.userAgent.toLowerCase().indexOf('msie') != -1 && document.all) {
                             e.cancelBubble = true;
                             e.returnValue = false;
-                        }
-                        else {
+                        } else {
                             e.stopPropagation();
                         }
                     });
@@ -1071,8 +1061,7 @@
 
             if (options.remove) {
                 options.remove.apply(this, [el]);
-            }
-            else {
+            } else {
                 overlay.el.parentNode.removeChild(overlay.el);
                 overlay.el = null;
             }
@@ -1108,8 +1097,7 @@
         if (points.length) {
             if (points[0][0] === undefined) {
                 path = points;
-            }
-            else {
+            } else {
                 for (var i = 0, latlng; latlng = points[i]; i++) {
                     path.push(new google.maps.LatLng(latlng[0], latlng[1]));
                 }
@@ -1371,15 +1359,20 @@
         var layer;
 
         switch (layerName) {
-            case 'weather': this.singleLayers.weather = layer = new google.maps.weather.WeatherLayer();
+            case 'weather':
+                this.singleLayers.weather = layer = new google.maps.weather.WeatherLayer();
                 break;
-            case 'clouds': this.singleLayers.clouds = layer = new google.maps.weather.CloudLayer();
+            case 'clouds':
+                this.singleLayers.clouds = layer = new google.maps.weather.CloudLayer();
                 break;
-            case 'traffic': this.singleLayers.traffic = layer = new google.maps.TrafficLayer();
+            case 'traffic':
+                this.singleLayers.traffic = layer = new google.maps.TrafficLayer();
                 break;
-            case 'transit': this.singleLayers.transit = layer = new google.maps.TransitLayer();
+            case 'transit':
+                this.singleLayers.transit = layer = new google.maps.TransitLayer();
                 break;
-            case 'bicycling': this.singleLayers.bicycling = layer = new google.maps.BicyclingLayer();
+            case 'bicycling':
+                this.singleLayers.bicycling = layer = new google.maps.BicyclingLayer();
                 break;
             case 'panoramio':
                 this.singleLayers.panoramio = layer = new google.maps.panoramio.PanoramioLayer();
@@ -1453,8 +1446,7 @@
             this.singleLayers[layer].setMap(null);
 
             delete this.singleLayers[layer];
-        }
-        else {
+        } else {
             for (var i = 0; i < this.layers.length; i++) {
                 if (this.layers[i] === layer) {
                     this.layers[i].setMap(null);
@@ -1486,17 +1478,16 @@
 
         if (options.unitSystem === 'imperial') {
             unitSystem = google.maps.UnitSystem.IMPERIAL;
-        }
-        else {
+        } else {
             unitSystem = google.maps.UnitSystem.METRIC;
         }
 
         var base_options = {
-            avoidHighways: false,
-            avoidTolls: false,
-            optimizeWaypoints: false,
-            waypoints: []
-        },
+                avoidHighways: false,
+                avoidTolls: false,
+                optimizeWaypoints: false,
+                waypoints: []
+            },
             request_options = extend_object(base_options, options);
 
         request_options.origin = /string/.test(typeof options.origin) ? options.origin : new google.maps.LatLng(options.origin[0], options.origin[1]);
@@ -1522,8 +1513,7 @@
                 if (options.callback) {
                     options.callback(routes, result, status);
                 }
-            }
-            else {
+            } else {
                 if (options.error) {
                     options.error(result, status);
                 }
@@ -1678,8 +1668,7 @@
                     }
                 }
             });
-        }
-        else if (options.route) {
+        } else if (options.route) {
             if (options.route.legs.length > 0) {
                 var steps = options.route.legs[0].steps;
                 for (var i = 0, step; step = steps[i]; i++) {
@@ -1736,8 +1725,7 @@
                     }
                 }
             });
-        }
-        else if (options.route) {
+        } else if (options.route) {
             if (options.route.legs.length > 0) {
                 var steps = options.route.legs[0].steps;
                 for (var i = 0, step; step = steps[i]; i++) {
@@ -1909,17 +1897,14 @@
         if (options.center) {
             parameters.push('center=' + options.center);
             delete options.center;
-        }
-        else if (options.address) {
+        } else if (options.address) {
             parameters.push('center=' + options.address);
             delete options.address;
-        }
-        else if (options.lat) {
+        } else if (options.lat) {
             parameters.push(['center=', options.lat, ',', options.lng].join(''));
             delete options.lat;
             delete options.lng;
-        }
-        else if (options.visible) {
+        } else if (options.visible) {
             var visible = encodeURI(options.visible.join('|'));
             parameters.push('visible=' + visible);
         }
@@ -1930,8 +1915,7 @@
                 size = size.join('x');
             }
             delete options.size;
-        }
-        else {
+        } else {
             size = '630x300';
         }
         parameters.push('size=' + size);
@@ -1960,8 +1944,7 @@
                 if (data.size && data.size !== 'normal') {
                     marker.push('size:' + data.size);
                     delete data.size;
-                }
-                else if (data.icon) {
+                } else if (data.icon) {
                     marker.push('icon:' + encodeURI(data.icon));
                     delete data.icon;
                 }
@@ -2074,8 +2057,7 @@
                 for (var j = 0, pos; pos = path[j]; j++) {
                     polyline.push(pos.join(','));
                 }
-            }
-            else {
+            } else {
                 polyline.push('enc:' + path);
             }
 
@@ -2098,8 +2080,7 @@
             var mapType = new google.maps.ImageMapType(options);
 
             this.map.mapTypes.set(mapTypeId, mapType);
-        }
-        else {
+        } else {
             throw "'getTileUrl' function required.";
         }
     };
@@ -2111,8 +2092,7 @@
             delete options.index;
 
             this.map.overlayMapTypes.insertAt(overlayMapTypeIndex, options);
-        }
-        else {
+        } else {
             throw "'getTile' function required.";
         }
     };
@@ -2122,7 +2102,9 @@
     };
 
     GMaps.prototype.addStyle = function (options) {
-        var styledMapType = new google.maps.StyledMapType(options.styles, { name: options.styledMapName });
+        var styledMapType = new google.maps.StyledMapType(options.styles, {
+            name: options.styledMapName
+        });
 
         this.map.mapTypes.set(options.mapTypeId, styledMapType);
     };
@@ -2155,7 +2137,9 @@
         delete options.lng;
 
         var streetview_events = ['closeclick', 'links_changed', 'pano_changed', 'position_changed', 'pov_changed', 'resize', 'visible_changed'],
-            streetview_options = extend_object({ visible: true }, options);
+            streetview_options = extend_object({
+                visible: true
+            }, options);
 
         for (var i = 0; i < streetview_events.length; i++) {
             delete streetview_options[streetview_events[i]];
@@ -2194,8 +2178,7 @@
         if (GMaps.custom_events.indexOf(event_name) == -1) {
             if (object instanceof GMaps) object = object.map;
             return google.maps.event.addListener(object, event_name, handler);
-        }
-        else {
+        } else {
             var registered_event = {
                 handler: handler,
                 eventName: event_name
@@ -2212,8 +2195,7 @@
         if (GMaps.custom_events.indexOf(event_name) == -1) {
             if (object instanceof GMaps) object = object.map;
             google.maps.event.clearListeners(object, event_name);
-        }
-        else {
+        } else {
             object.registered_events[event_name] = [];
         }
     };
@@ -2228,8 +2210,7 @@
     GMaps.fire = function (event_name, object, scope) {
         if (GMaps.custom_events.indexOf(event_name) == -1) {
             google.maps.event.trigger(object, event_name, Array.prototype.slice.apply(arguments).slice(2));
-        }
-        else {
+        } else {
             if (event_name in scope.registered_events) {
                 var firing_events = scope.registered_events[event_name];
 
@@ -2259,8 +2240,7 @@
                     complete_callback();
                 }
             }, options.options);
-        }
-        else {
+        } else {
             options.not_supported();
 
             if (complete_callback) {
@@ -2349,8 +2329,7 @@
             google.maps.Circle.prototype.containsLatLng = function (latLng) {
                 if (google.maps.geometry) {
                     return google.maps.geometry.spherical.computeDistanceBetween(this.getCenter(), latLng) <= this.getRadius();
-                }
-                else {
+                } else {
                     return true;
                 }
             };
@@ -2381,7 +2360,7 @@
     // Array indexOf
     // https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Array/indexOf
     if (!Array.prototype.indexOf) {
-        Array.prototype.indexOf = function (searchElement /*, fromIndex */) {
+        Array.prototype.indexOf = function (searchElement /*, fromIndex */ ) {
             "use strict";
             if (this == null) {
                 throw new TypeError();
